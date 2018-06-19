@@ -7,7 +7,7 @@
 #fi
 if [ -f /data/misc/ipfs/config ];then
 	echo "ipfsconfig exist" > /dev/console;
-	/system/bin/ipfs daemon > /dev/console;
 else
 	echo "ipfsconfig not exist" > /dev/console;
+	/system/bin/ipfs init;
 fi
