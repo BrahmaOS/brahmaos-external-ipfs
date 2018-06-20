@@ -2,18 +2,16 @@ on post-fs-data
     mkdir /data/misc/ipfs
     export IPFS_PATH /data/misc/ipfs
 
-service ipfsinit /system/bin/ipfsinit
+service ipfsinit /system/bin/ipfs init
     class main
     user root
     group root
     seclabel u:r:ipfs:s0
-    capabilities BLOCK_SUSPEND NET_ADMIN
     oneshot
 
-service ipfsd /system/bin/ipfsdaemon
+service ipfsd /system/bin/ipfs daemon
     user root
     group inet
-    console console
     capabilities BLOCK_SUSPEND NET_ADMIN
     socket ipfsd stream 0660 root inet
     seclabel u:r:ipfs:s0
