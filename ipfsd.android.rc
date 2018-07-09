@@ -1,18 +1,19 @@
 on post-fs-data
-    mkdir /data/misc/ipfs
+    mkdir /data/misc/ipfs 0770 system system
     export IPFS_PATH /data/misc/ipfs
 
 service ipfsinit /system/bin/ipfs init
     class main
-    user root
-    group root
+    user system
+    group system
     seclabel u:r:ipfs:s0
     oneshot
 
 service ipfsd /system/bin/ipfs daemon
-    user root
+    user system
     group inet
     capabilities BLOCK_SUSPEND NET_ADMIN
-    socket ipfsd stream 0660 root inet
+    socket ipfsd stream 0770 system inet
     seclabel u:r:ipfs:s0
+    disabled
     oneshot
